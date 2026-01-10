@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extracteur de Frames Vidéo Avancé</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Traitement Vidéo Automatisé</h1>
+    </header>
+    <main>
+        <section id="upload-form-section">
+            <h2>1. Télécharger et Configurer</h2>
+            <form id="upload-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="video-file">Fichier Vidéo (mp4, mov, avi) :</label>
+                    <input type="file" id="video-file" name="video_file" accept=".mp4,.mov,.avi" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="target-width">Largeur Cible des Frames (px) :</label>
+                    <input type="number" id="target-width" name="target_width" value="512" min="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="interval">Intervalle d'Extraction (frames/seconde) :</label>
+                    <input type="number" id="interval" name="interval" value="1" min="0.1" step="0.1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="output-format">Format de Sortie :</label>
+                    <select id="output-format" name="output_format" required>
+                        <option value="png">PNG (Qualité Max, Transparence)</option>
+                        <option value="jpg">JPG (Compression)</option>
+                        <option value="webp">WEBP (Optimisé Web, Transparence)</option>
+                    </select>
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="unblur-option" name="unblur_option">
+                    <label for="unblur-option">Option "Unblur" (Amélioration de netteté)</label>
+                </div>
+
+                <button type="submit" id="process-button">Lancer le Traitement</button>
+            </form>
+        </section>
+
+        <section id="progress-section" style="display:none;">
+            <h2>2. Progression du Traitement</h2>
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+                <span class="progress-text" id="progress-text">0%</span>
+            </div>
+            <p id="status-message">En attente du lancement...</p>
+        </section>
+
+        <section id="preview-section" style="display:none;">
+            <h2>3. Aperçu des Frames Générées</h2>
+            <div id="frames-preview" class="preview-grid">
+                <!-- Les aperçus des frames seront insérés ici par JavaScript -->
+            </div>
+            <button id="download-button" style="display:none;">Télécharger l'Archive ZIP</button>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
